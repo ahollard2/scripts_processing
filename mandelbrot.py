@@ -1,17 +1,13 @@
 from math import sqrt, degrees,atan2, sin, cos,radians
 
-
 xmin=-2
 xmax=2
-
 
 ymin = -2
 ymax = 2
 
-
 rangex = xmax - xmin
 rangey = ymax - ymin
-
 def setup():
     global xscl, yscl
     size(600,600)
@@ -22,8 +18,9 @@ def setup():
     
 def draw():
     translate(width/2,height/2)
-    for x in arange(xmin,xmax,.01):
-        for y in arange(ymin,ymax,.01):
+    for x in range(xmin,100*xmax):
+        for y in range(ymin,100*ymax):
+	        x,y = x/100, y/100
             z=[x,y]
             col=mandelbrot(z,100)
             if col == 100:
@@ -38,23 +35,11 @@ def mandelbrot(z,num):
     count=0
     z1=z
     while count <= num:
-        
         if magnitude(z1) > 2.0:
-        
             return count
-       
         z1=cAdd(cMult(z1,z1),z)
         count+=1
-    
     return num
-
-def arange(start,stop,step):
-    output = []
-    x = start
-    while x < stop:
-        output.append(x)
-        x += step
-    return output
 
 
 def cAdd(a,b):
